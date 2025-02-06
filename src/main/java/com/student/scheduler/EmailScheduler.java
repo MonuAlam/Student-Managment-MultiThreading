@@ -20,15 +20,30 @@ public class EmailScheduler {
     @Autowired
     private EmailService emailService;
 
-    @Scheduled(cron = "0 38	 16 * * *") // Runs daily at 4:19 PM
-    public void sendDailyEmails() {
-        List<Student> students = studentRepository.findAll();
+    // @Scheduled(cron = "0 38	 16 * * *") // Runs daily at 4:19 PM
+    // public void sendDailyEmails() {
+    //     List<Student> students = studentRepository.findAll();
         
-        students.parallelStream().forEach(student -> {
-            emailService.sendEmail(student.getEmail(), "Daily Student Notification", 
-                "Dear " + student.getName() + ",\n\nThis is a reminder email from Student Management System!\n\nRegards,\nTeam");
-        });
-    }
+    //     students.parallelStream().forEach(student -> {
+    //         emailService.sendEmail(student.getEmail(), "Daily Student Notification", 
+    //             "Dear " + student.getName() + ",\n\nThis is a reminder email from Student Management System!\n\nRegards,\nTeam");
+    //     });
+    // }
+
+
+    // this is better as compare to parallelStream
+
+      // @Scheduled(cron = "0 38	 16 * * *") // Runs daily at 4:19 PM
+    // public void sendDailyEmails() {
+    //     List<Student> students = studentRepository.findAll();
+        
+    // students.forEach(student -> {
+    //     emailService.sendEmail(student.getEmail(), "Daily Student Notification", 
+    //         "Dear " + student.getName() + ",\n\nThis is a reminder email from Student Management System!\n\nRegards,\nTeam");
+    // });
+    // }
+
+
     
     @Scheduled(cron = "0/5 * * * * *")  // every 5 seconds
     public void triggerHeavyTasks() {
